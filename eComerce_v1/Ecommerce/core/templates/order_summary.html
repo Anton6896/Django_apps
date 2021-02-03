@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!--- Two Column Section -->
+<div class="container-fluid mt-3">
+    <div class="row padding">
+        <div class="col-lg-8">
+
+            <h1 class="mt-3">Total order :</h1>
+            <div class="table-responsive text-nowrap">
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Item title</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Tot price</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        {% for i in order %}
+                        <tr>
+                            <!-- title -->
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{i.item.title}}</td>
+
+                            <!-- check for discount total price  -->
+                            {% if i.item.discount_price %}
+                            <td>
+                                <p> $ {{i.item.discount_price}} </i><span class="badge badge-pill danger-color ml-3">
+                                        discount
+                                    </span>
+                                </p>
+                            </td>
+                            {% else %}
+                            <td>
+                                $ {{i.item.price}} </i>
+                            </td>
+                            {% endif %}
+
+                            <td>
+                                <a href="{% url 'core:remove_fromlist' pk=i.item.pk %}"><i class="fas fa-minus"></i></a>
+                                {{i.quantity}}
+                                <a href="{% url 'core:append_tolist' pk=i.item.pk %}"><i class="fas fa-plus"></i></a>
+                            </td>
+
+
+                            <td>$ {{ i.total_price}} <a href="{% url 'core:trash_item' pk=i.item.pk %}"
+                                    class="float-right" style="color: brown;"> <i class="fas fa-trash"></i></a></td>
+
+
+                        </tr>
+
+                        {% empty %}
+                        <tr>
+                            <td>
+                                <b>your cart is empty for now </b>
+                            </td>
+                        </tr>
+                        {% endfor %}
+
+                        {% if total_price != 0 %}
+                        <tr>
+                            <td colspan="4"><b>Total:</b> </td>
+                            <td>
+                                <p><b>$ {{ total_price }}</b></p>
+                                <a href="{% url 'core:checkout' %}" class="btn btn-info">
+                                    check out
+                                </a>
+                            </td>
+                        </tr>
+                        {% endif %}
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+        <div class="col-lg-4 mim mt-5">
+            <img src="img/background3.png" alt="no image !" class="img-fluid">
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

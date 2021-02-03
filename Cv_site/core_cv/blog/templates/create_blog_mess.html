@@ -1,0 +1,42 @@
+{% extends "index.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+
+<section id="contact" class="pt120 pb100">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-12 text-center pb20">
+                <h2>Create new Post <br></h2>
+                <p class="lead">or see other <span class="color"><a href="{% url 'blog:blog_list' %}"> here </a></span>
+                </p>
+            </div>
+
+            <div class="col-md-8 col-md-offset-2 contact box-style">
+                <div id="message-info"></div>
+                <form method="POST" >
+
+                    {% csrf_token %}
+                    {{ form | crispy }}
+                    
+                    <div class="col-md-12">
+                        <input type="submit" class="submit btn btn-lg btn-primary" id="submit" value="Enter" />
+                    </div>
+
+                </form>
+                <small class="text-muted">Thanks    </small>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+
+
+{% endblock content %}

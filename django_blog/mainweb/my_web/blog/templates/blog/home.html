@@ -1,0 +1,51 @@
+{% extends "my_web/base.html" %}
+{% load static %}
+{% block content %}
+<h1 class="center"> hello {{user.username}} you are at home page </h1>
+<br>
+<!-- using  context_object_name posts -->
+{% for post in posts %}
+<!--- Two Column Section -->
+<div class="container-fluid padding">
+    <div class="row padding">
+
+        <div class="col-lg-6 jumbotron">
+            <div>
+                <a href="{% url 'blog-post-detail' pk=post.id %}">
+                    <h1>{{ post.title }}</h1>
+                </a>
+                <p>{{ post.content }}</p>
+            </div>
+        </div>
+        <div class="col-lg-5 mim">
+            <div class="row">
+                <img class="rounded-circle account-img" src="{{ post.author.profile.image.url }}" alt="none">
+                {% comment %} use date filter from django doc and get ListView of all post from that user
+                {% endcomment %}
+                <p> writhen by <a href="{% url 'blog-user-posts' post.author.username %}"> "{{ post.author }}" </a> , on
+                    - {{ post.date_posted | date:"F d, Y" }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+{% endfor %}
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+        <a href="?page=1" class="btn btn-outline-info mb-4">&laquo; first</a>
+        <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-outline-info mb-4">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline-info mb-4">next</a>
+        <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-outline-info mb-4">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+{% endblock content %}

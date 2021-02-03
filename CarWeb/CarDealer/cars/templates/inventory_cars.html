@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- from here you can get all cars and modify the data that you want to see  -->
+<ul>
+    {% for car in cars_set %}
+        <li>{{ car.brand }} , car id : {{ car.id}}</li>
+    {% endfor %}
+</ul>
+{% endblock content %}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <ul>
+
+        <head>
+            <h3>dealer info :</h3>
+        </head>
+        <li>dealer name : {{ car.dealer.name }}</li>
+        <li>email : <a href="">{{ car.dealer.email }}</a></li>
+
+    </ul>
+</div>
+<br>
+
+<div class="container">
+    <h3>car detail :</h3>
+    <ul>
+        <li>brand : {{ car.brand }}</li>
+        <li>category : {{ car.category }}</li>
+    </ul>
+    <br>
+    <div class="row jumbotron container-fluid">
+        {% if car.image1 %}
+        <img src="{{ car.image1.url }}" alt="#" />
+        {% endif %}
+        {% if car.image2 %}
+        <img src="{{ car.image2.url }}" alt="#" />
+        {% endif %}
+    </div>
+
+</div>
+{% endblock content %}

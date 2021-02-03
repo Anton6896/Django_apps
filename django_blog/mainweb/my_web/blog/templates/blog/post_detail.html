@@ -1,0 +1,40 @@
+{% extends "my_web/base.html" %}
+{% load static %}
+
+{% block content %}
+<h1 class="center"> Post detail page </h1>
+<!--- Two Column Section -->
+<div class="container-fluid padding">
+    <div class="row">
+        <div class="col-lg-6 jumbotron">
+            <div>
+                <h1>{{ object.title }}</h1>
+                <p>{{ object.content }}</p>
+                <p>{{ object.id }}</p>
+            </div>
+        </div>
+        <div class="col-lg-5 mim">
+            <div class="content-section">
+                <h3>Post data </h3>
+                <p class='text-muted'>You can put any information here you'd like.</p>
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-light">Author: "{{ object.author }}"</li>
+                    <li class="list-group-item list-group-item-light">Date Posted:
+                        {{ object.date_posted | date:"F d, Y" }} </li>
+                    <li class="list-group-item list-group-item-light">field </li>
+                    <li class="list-group-item list-group-item-light">field </li>
+                </ul>
+            </div>
+            {% if user.is_authenticated %}
+            {% if object.author.email == user.email or user.is_superuser %}
+            <div class="container">
+                <a href="{% url 'blog-post-update' object.id %}" class="btn btn-info"> edit </a>
+                <a href="{% url 'blog-post-delete' object.id %}" class="btn btn-danger"> delete </a>
+                
+            </div>
+            {% endif %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

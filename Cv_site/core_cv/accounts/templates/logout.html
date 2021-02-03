@@ -1,0 +1,43 @@
+{% extends "index.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+
+{# todo connect contact form and contact info in same frame #}
+<!-- Contact Info -->
+{# how to contact me #}
+<section class="parallax pt110 pb70" data-overlay-dark="8">
+
+</section>
+<!-- End Contact Info -->
+
+<!-- Contact Form -->
+<section id="contact" class="pt120 pb100">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-12 text-center pb20">
+                <h2>Log in <br></h2>
+                <p class="lead">or register <span class="color"><a href="{% url 'accounts:register' %}"> here
+                        </a></span>
+                </p>
+            </div>
+
+            <div class="col-md-8 col-md-offset-2 contact box-style">
+                <div id="message-info"></div>
+                <div>
+                    <h1> Thanks and goodby </h1>
+                </div>
+                <h1> Thanks and goodby </h1>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- End Contact Form -->
+
+
+{% endblock content %}

@@ -1,0 +1,110 @@
+{% extends "index.html" %}
+{% load static %}
+
+
+{% block content %}
+<section class="blog">
+    <div class="container">
+        <div class="row">
+
+            <!-- Blog Content -->
+            <div class="col-md-8 mr-auto">
+
+                <div class="blog-post">
+
+                    <div class="carousel mt20 mb20">
+                        <div><img src="{{ blog.image.url }}" class="img-responsive width100" alt="#"></div>
+                        <div><img src="img/blog/2.jpg" class="img-responsive width100" alt="#"></div>
+                        <div><img src="img/blog/3.jpg" class="img-responsive width100" alt="#"></div>
+                    </div>
+
+                    <div class="post-header">
+                        <h5><span>In</span> <strong><a href="#" class="color">Lifestyle</a></strong></h5>
+                        <a class="link-to-post" href="#">
+                            <h3><strong>{{ blog.title }}</strong></h3>
+                        </a>
+                    </div>
+
+                    <p>{{ blog.content }}</p>
+
+                    <!-- buttom post section  -->
+                    <div class="post-tags">
+                        <a href="#" rel="tag">Forest</a>
+                        <a href="#" rel="tag">Northwest</a>
+                        <a href="#" rel="tag">Ocean</a>
+                        <a href="#" rel="tag">Travel</a>
+                    </div>
+
+                    <div class="post-share">
+                        <a href="#"><i class="ion-social-facebook"></i> <span>Share</span></a>
+                        <a href="#"><i class="ion-social-twitter"></i> <span>Tweet</span></a>
+                        <a href="#"><i class="ion-social-pinterest"></i> <span>Pin it</span></a>
+                        <a href="#"><i class="ion-social-googleplus"></i></a>
+                    </div>
+
+                </div>
+
+
+                <!-- Comments  -->
+                {% if blog.comment %}
+                <h5 class="comment-number"><strong> {{ blog.comment.all.count }} Comments :</strong></h5>
+                <ul class="vos-comments">
+
+                    {% for comment in blog.comment.all %}
+
+                    <li class="post-comment">
+                        <div class="comment-content">
+                            <!-- todo  image user  -->
+                            <a href="#" class="avatar"><img src="{{ comment.author.image.url }}" alt="#"></a>
+                            <div class="post-body">
+                                <div class="comment-header">
+                                    <span class="author"><a href="#">{{ comment.author.username }}</a></span>
+                                    <span class="time-ago"><a href="#">{{ comment.created_at }} </a></span>
+                                </div>
+                                <div class="post-message">
+                                    <p>{{ comment.content }}</p>
+                                </div>
+                                <!-- <div class="comment-footer">
+                                    <span class="reply"><a href="#"><i class="ion-reply"></i> Reply</a></span>
+                                </div> -->
+                            </div>
+                        </div>
+                    </li>
+
+                    {% endfor %}
+
+                </ul>
+                {% else %}
+                <h1> no comments !! </h1>
+                {% endif %}
+
+
+                <!-- form for comment  -->
+                <div class="form-leave-comment">
+                    <h5><strong>Leave Comment</strong></h5>
+
+                    <form method="POST", action=".">
+                        <div class="col-sm-12">
+                            {% csrf_token %}
+                            {{ form }}
+                        </div>
+                        <div class="col-md-12 text-center">
+                            <input type="submit" class="submit btn btn-lg btn-primary" id="submit"
+                                value="Submit Comment" />
+                        </div>
+
+                    </form>
+
+                </div>
+
+
+            </div>
+            <!-- End Blog Content -->
+
+
+        </div>
+    </div>
+</section>
+
+
+{% endblock content %}

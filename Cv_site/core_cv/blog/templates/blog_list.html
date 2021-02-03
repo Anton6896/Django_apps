@@ -1,0 +1,225 @@
+{% extends "index.html" %}
+{% load static %}
+
+
+{% block content %}
+
+
+<!-- Blog -->
+<section class="blog">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-9">
+
+                <!-- blog list section  -->
+
+                {% if blogs_list %}
+                <ul class="blog-list">
+                    {% for blog in blogs_list %}
+
+                    <li class="row vertical-align">
+                        <div class="col-md-6 mt20 mb20">
+                            <!-- <img src="{% static 'img/blog/2.jpg' %}" alt="#"> -->
+                            <a href="#"><img src="{{ blog.image.url }}" class="img-responsive width100" alt="#"></a>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="post-header">
+                                <h5><span>In</span> <strong><a href="#" class="color">{{ blog.author }}</a></strong>
+                                </h5>
+
+                                <!-- href="{% url 'blog:blog_detail' pk=blog.pk %}" -->
+                                <a href="{% url 'blog:blog_detail' pk=blog.pk %}">
+                                    <h3><strong>{{ blog.title }}</strong></h3>
+                                </a>
+                            </div>
+                            <p>{{ blog.content }}</p>
+                        </div>
+                    </li>
+
+                    {% endfor %}
+
+
+                    <!--
+                        
+                        <li class="row vertical-align">
+                        <div class="col-md-6 mt20 mb20">
+                            <a href="blog-post-gallery.html"><img src="{% static 'img/blog/2.jpg' %}" class="img-responsive width100" alt="#"></a>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="post-header">
+                                <h5><span>In</span> <strong><a href="#" class="color">Lifestyle</a></strong></h5>
+                                <a href="blog-post-gallery.html"><h3><strong>Gallery Post</strong></h3></a>
+                            </div>
+                            <p>Meh synth Schlitz, tempor duis single-origin coffee ea next level ethnic fingerstache fanny pack nostrud. Photo booth anim 8-bit hella, PBR 3 wolf moon beard Helvetica. Salvia esse nihil, flexitarian Truffaut synth art party deep v chillwave.</p>
+                        </div>
+                    </li>
+
+                    <li class="row vertical-align">
+                        <div class="mt20 mb20 col-md-6">
+                            <a href="blog-post-video.html">
+                                <div class="video-container">
+                                    <img src="img/video/thumbnail-youtube.jpg"/>
+                                    <iframe data-video-embed="https://www.youtube.com/embed/B08iLAtS3AQ"></iframe>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="post-header">
+                                <h5><span>In</span> <strong><a href="#" class="color">Lifestyle</a></strong></h5>
+                                <a href="blog-post-gallery.html"><h3><strong>Video Post</strong></h3></a>
+                            </div>
+                            <p>Meh synth Schlitz, tempor duis single-origin coffee ea next level ethnic fingerstache fanny pack nostrud. Photo booth anim 8-bit hella, PBR 3 wolf moon beard Helvetica. Salvia esse nihil, flexitarian Truffaut synth art party deep v chillwave.</p>
+                        </div>
+                    </li> 
+
+                -->
+
+                </ul>
+
+                {% else %}
+                <h1> cant see blog lost data </h1>
+                {% endif %}
+
+
+
+
+
+
+                <!-- Pagination -->
+                <div class="col-md-12 text-center">
+                    <ul class="blog-pagination mb60">
+                        <!-- <li>
+                            <a href="#">
+                                <i class="ion-android-arrow-back"></i>
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="#">1</a>
+                        </li>
+                        <li>
+                            <a href="#">2</a>
+                        </li>
+                        <li>
+                            <a href="#">3</a>
+                        </li>
+                        <li>
+                            <a href="#">4</a>
+                        </li>
+                        <li>
+                            <a href="#">5</a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="ion-android-arrow-forward"></i>
+                            </a>
+                        </li> -->
+
+                        {% if page_obj.has_previous %}
+                        <li>
+                        
+
+
+                            <a href="?page=1" class="btn btn-outline-info mb-4">first </a>
+                            <a href="page={{ page_obj.previous_page_number }}" class="btn btn-outline-info mb-4">prev 
+                               </a>
+
+                        </li>
+                        {% endif %}
+
+                        <li>
+                            <span class="active">
+                                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                            </span>
+                        </li>
+
+
+                        {% if page_obj.has_next %}
+                        <li>
+                            <a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline-info mb-4">next</a>
+                            <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-outline-info mb-4">last
+                                &raquo;</a>
+                        </li>
+                        {% endif %}
+
+
+
+                    </ul>
+                </div>
+                <!-- End Pagination -->
+
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+
+
+
+
+            <!-- Sidebar -->
+            <div class="col-md-3 sidebar">
+
+                <div class="blog-widget">
+                    <h5>About</h5>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dui lorem, adipiscing in adipiscing
+                        et, interdum nec metus. Mauris ultricies, justo eu convallis placerat.</p>
+                </div>
+
+                <div class="blog-widget">
+                    <h5>Categories</h5>
+                    <ul class="category-list list-icons">
+                        <li><a href="#"><i class="ion-ios-arrow-right"></i>Travel</a></li>
+                        <li><a href="#"><i class="ion-ios-arrow-right"></i>Lifestyle</a></li>
+                        <li><a href="#"><i class="ion-ios-arrow-right"></i>Wander</a></li>
+                        <li><a href="#"><i class="ion-ios-arrow-right"></i>Graphics</a></li>
+                        <li><a href="#"><i class="ion-ios-arrow-right"></i>Other Bits</a></li>
+                    </ul>
+                </div>
+
+                <div class="blog-widget blog-tags">
+                    <h5>Tags</h5>
+                    <ul class="tags-list">
+                        <li><a href="#">Design</a></li>
+                        <li><a href="#">Photography</a></li>
+                        <li><a href="#">Branding</a></li>
+                        <li><a href="#">Videos</a></li>
+                        <li><a href="#">Web Design</a></li>
+                        <li><a href="#">Apps</a></li>
+                        <li><a href="#">Development</a></li>
+                    </ul>
+                </div>
+
+                <div class="blog-widget">
+                    <h5>Archives</h5>
+                    <ul class="category-list list-icons">
+                        <li><a href="#"><i class="ion-ios-arrow-right"></i>April 2016</a></li>
+                        <li><a href="#"><i class="ion-ios-arrow-right"></i>March 2016</a></li>
+                        <li><a href="#"><i class="ion-ios-arrow-right"></i>February 2016</a></li>
+                        <li><a href="#"><i class="ion-ios-arrow-right"></i>January 2016</a></li>
+                        <li><a href="#"><i class="ion-ios-arrow-right"></i>December 2015</a></li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-share">
+                    <ul class="list-inline">
+                        <li><a href="#"><i class="ion-social-twitter"></i></a></li>
+                        <li><a href="#"><i class="ion-social-facebook"></i></a></li>
+                        <li><a href="#"><i class="ion-social-linkedin"></i></a></li>
+                        <li><a href="#"><i class="ion-social-pinterest"></i></a></li>
+                        <li><a href="#"><i class="ion-social-google"></i></a></li>
+                    </ul>
+                </div>
+
+            </div>
+            <!-- End Sidebar -->
+
+        </div>
+    </div>
+</section>
+<!-- End Blog -->
+
+
+{% endblock content %}

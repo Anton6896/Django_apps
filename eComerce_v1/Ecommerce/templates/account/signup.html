@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block content %}
+<h1>{% trans "Sign Up" %}</h1>
+
+<p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+
+<div class="container-fluid padding">
+  <div class="row padding">
+    <div class="col-lg-6">
+      <div class="jumbotron">
+        <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+          {% csrf_token %}
+          {% bootstrap_form form %}
+          {% if redirect_field_value %}
+          <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+          {% endif %}
+          {% buttons %}
+          <button type="submit" class="btn btn-primary">{% trans "Sign Up" %}</button>
+          {% endbuttons %}
+
+          <!-- <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+            {% endif %}
+            <button type="submit">{% trans "Sign Up" %} &raquo;</button>
+          </form> -->
+        </form>
+      </div>
+    </div>
+    <div class="col-lg-6 mim">
+      <img src="img/background3.png" alt="no image !" class="img-fluid">
+    </div>
+  </div>
+</div>
+
+{% endblock %}
