@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <br/>
+            <h3>Check out form :</h3>
+            <h6>order id : {{ order.order_id }}</h6>
+
+            <div class="container">
+                <!-- form checkout -->
+                <form method="post" action="">
+                    {% csrf_token %}
+                    <h4> shipping :</h4>
+                    {{ shipping_form|crispy }}
+                    <hr>
+                    <p>
+                        <button class="btn btn-outline-secondary" type="button" data-toggle="collapse"
+                                data-target="#collapseExample" aria-expanded="false"
+                                aria-controls="collapseExample">
+                            Billing Form
+                        </button>
+                    </p>
+                    <div class="collapse" id="collapseExample">
+                        <div class="card card-body">
+                            {{ billing_form|crispy }}
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">submit and payment</button>
+                </form>
+                <!-- end forms  -->
+                <div>
+                    <br/>
+                    <a href="{% url 'cart:cart_home' %}" class="btn btn-outline-primary">
+                        back
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm">
+            <br/>
+            <h3>additional info :</h3>
+            <hr/>
+
+            <div>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">total in cart</th>
+                        <th scope="col">with (15%) tax</th>
+                        <th scope="col">shipping</th>
+                        <th scope="col">$ total</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>{{ order.cart.total }}</td>
+                        <td>{{ order.cart.tax }}</td>
+                        <td>{{ order.shipping_total }}</td>
+                        <td>{{ end_price }}</td>
+                    </tr>
+                    <tr>
+                        <td>--</td>
+                        <td>--</td>
+                        <td>--</td>
+                        <td>--</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p></p>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

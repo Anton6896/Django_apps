@@ -1,0 +1,86 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light ">
+    <a class="navbar-brand" href="{% url 'users:home_page' %}">
+        {% if user.is_authenticated %}
+            {{ user.username }}
+        {% else %}
+            eCommerce
+        {% endif %}
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'users:home_page' %}">Home <span class="sr-only">(current)</span></a>
+            </li>
+
+            {% if user.is_authenticated %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'users:profile' %}"> Profile <span class="sr-only">(current)</span></a>
+                </li>
+            {% endif %}
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Products
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{% url 'products:product_list' %}">Products list</a>
+                    <a class="dropdown-item" href="{% url 'products:product_create' %}">Create new </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">---</a>
+                </div>
+            </li>
+
+            {% if user.is_superuser %}
+                <li class="nav-item">
+                    <a class="nav-link " style="color: red" href="{% url 'admin:index' %}" tabindex="-1"
+                       aria-disabled="true">Admin</a>
+                </li>
+            {% endif %}
+        </ul>
+
+
+        <ul class="navbar-nav  margin-right">
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'cart:cart_home' %}">
+                    <i class="fas fa-cart-plus"></i>
+                    <span id="cart_item_amount_navbar">
+                        cart {{ request.session.cart_total }}
+                    </span>
+                    <span class="sr-only">(current)</span></a>
+            </li>
+            {% comment %}
+                 login
+             {% endcomment %}
+            {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'users:logout_page' %}">logout</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'users:login_page' %}">login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'users:register_page' %}">register</a>
+                </li>
+            {% endif %}
+        </ul>
+
+        {% comment %}
+        search will transfer the user to the search view
+        that can be perform some logic behind the search
+        ( add specific items for this specific user )
+        {% endcomment %}
+        <form class="form-inline my-2 my-lg-0" method="GET" action="{% url 'search:search_list' %}">
+            <input name="q" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+                search
+            </button>
+        </form>
+    </div>
+</nav>

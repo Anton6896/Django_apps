@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+    <br>
+
+    {% if cart.products.exists %}
+
+        <div class="container">
+            <h1> Cart home page : </h1>
+
+            <br>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">title</th>
+                    <th scope="col">price</th>
+                    <th scope="col">with tax (15%)</th>
+                    <td></td>
+                </tr>
+                </thead>
+                <tbody>
+                {% for product in cart.products.all %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>
+                            <a href="{{ product.get_absolute_url }}">{{ product.title }}</a>
+
+                        </td>
+                        <td>{{ product.price }}</td>
+                        <td>
+                        </td>
+
+                        <td>
+                            <form class="delete_from_cart" method="post" action="{% url 'cart:delete_from_cart' %}">
+                                <input type="hidden" name="product_pk" value="{{ product.pk }}">
+
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-link">
+                                    <i class="far fa-trash-alt" style="color: #a41515"> </i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+
+
+                <tr>
+                    <th scope="row">total :</th>
+                    <td></td>
+                    <td>{{ cart.total }}</td>
+                    <td>{{ cart.tax }}</td>
+                    <td></td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <br>
+
+        <div class="container">
+            <hr>
+            <a href="{% url 'cart:cart_checkout' %}" class="btn btn-outline-primary"> check out </a>
+        </div>
+
+    {% else %}
+        <div class="container">
+            <h3> No products yet .</h3>
+        </div>
+    {% endif %}
+
+
+
+{% endblock content %}
