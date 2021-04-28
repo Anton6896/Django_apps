@@ -1,0 +1,178 @@
+[
+{
+    "model": "products.product",
+    "pk": 3,
+    "fields": {
+        "user": 1,
+        "title": "prod 1",
+        "description": "the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letra",
+        "price": "56.96",
+        "timestamp": "2021-01-26T12:24:59.972Z",
+        "image": "upload/products_img/fe6e07d3-132d-48f5-9a09-ff4f32d218f6.jpg",
+        "featured": false,
+        "active": false
+    }
+},
+{
+    "model": "products.product",
+    "pk": 4,
+    "fields": {
+        "user": 1,
+        "title": "u1 prod",
+        "description": "or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunk",
+        "price": "56.32",
+        "timestamp": "2021-01-26T12:28:04Z",
+        "image": "upload/products_img/e5853f9d-90ea-4dca-b046-570ea14bb5ff.jpg",
+        "featured": false,
+        "active": false
+    }
+},
+{
+    "model": "products.product",
+    "pk": 8,
+    "fields": {
+        "user": 1,
+        "title": "ad prot 1",
+        "description": "Bootstrap’s grid system uses a series of containers, rows, and columns to layout and align content. It’s built with flexbox and is fully responsive. Below is an example and an in-depth look at how the grid comes together.",
+        "price": "45.69",
+        "timestamp": "2021-01-27T15:57:43.277Z",
+        "image": "upload/products_img/004a10ba-6ec9-40ae-8be2-cee18a6e645b.jpg",
+        "featured": true,
+        "active": true
+    }
+},
+{
+    "model": "products.product",
+    "pk": 9,
+    "fields": {
+        "user": 1,
+        "title": "item 2",
+        "description": "Bootstrap’s grid system uses a series of containers, rows, and columns to layout and align content. It’s built with flexbox and is fully responsive. Below is an example and an in-depth look at how the grid comes together.",
+        "price": "45.69",
+        "timestamp": "2021-01-27T16:01:46.145Z",
+        "image": "upload/products_img/677eeebd-3876-4728-9846-2adb006f877f.jpeg",
+        "featured": false,
+        "active": false
+    }
+},
+{
+    "model": "products.product",
+    "pk": 10,
+    "fields": {
+        "user": 1,
+        "title": "item 111",
+        "description": "all viewport and device sizes.\r\nRows are wrappers for columns. Each column has horizontal padding (called a gutter) for controlling the space between them. This padding is then counteracted on the rows with negative margins. This way, all the content in your columns is visually aligned down the left side.\r\nIn a grid layout, content must be placed within columns and only columns may be immediate children of rows.\r\nThanks to flexbox, grid co",
+        "price": "75.36",
+        "timestamp": "2021-01-27T16:05:06.621Z",
+        "image": "upload/products_img/1aef8806-bd25-442e-8387-c2d936da1ff9.jpg",
+        "featured": false,
+        "active": true
+    }
+},
+{
+    "model": "products.product",
+    "pk": 11,
+    "fields": {
+        "user": 1,
+        "title": "amazing hat",
+        "description": "unt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint oc",
+        "price": "45.62",
+        "timestamp": "2021-01-30T10:04:59Z",
+        "image": "upload/products_img/b34a402b-3459-4498-befd-6a602f7371a4.jpg",
+        "featured": false,
+        "active": true
+    }
+},
+{
+    "model": "products.product",
+    "pk": 12,
+    "fields": {
+        "user": 1,
+        "title": "zippo",
+        "description": "unt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint oc",
+        "price": "45.23",
+        "timestamp": "2021-01-30T10:06:27Z",
+        "image": "upload/products_img/801140f1-89ee-432c-8339-b4c2ba5b322f.jpg",
+        "featured": true,
+        "active": true
+    }
+},
+{
+    "model": "products.product",
+    "pk": 13,
+    "fields": {
+        "user": 1,
+        "title": "hamer",
+        "description": "fdsfsdffs",
+        "price": "85.36",
+        "timestamp": "2021-01-30T11:29:52Z",
+        "image": "default.jpg",
+        "featured": true,
+        "active": false
+    }
+},
+{
+    "model": "products.product",
+    "pk": 14,
+    "fields": {
+        "user": 1,
+        "title": "boots great",
+        "description": "or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book.",
+        "price": "65.20",
+        "timestamp": "2021-01-31T13:29:30.082Z",
+        "image": "upload/products_img/c99e15fe-2c4b-4b38-848c-e4553ae1e192.jfif",
+        "featured": true,
+        "active": true
+    }
+},
+{
+    "model": "products.comment",
+    "pk": 1,
+    "fields": {
+        "user": 1,
+        "product": 3,
+        "timestamp": "2021-01-27T07:34:20Z",
+        "content": "m Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,"
+    }
+},
+{
+    "model": "products.comment",
+    "pk": 6,
+    "fields": {
+        "user": 1,
+        "product": 4,
+        "timestamp": "2021-01-27T08:23:17.488Z",
+        "content": "mbled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Let"
+    }
+},
+{
+    "model": "products.comment",
+    "pk": 7,
+    "fields": {
+        "user": 1,
+        "product": 4,
+        "timestamp": "2021-01-27T08:23:33.797Z",
+        "content": "00 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going throu"
+    }
+},
+{
+    "model": "products.comment",
+    "pk": 13,
+    "fields": {
+        "user": 1,
+        "product": 3,
+        "timestamp": "2021-01-27T14:02:54.649Z",
+        "content": "dawdadas"
+    }
+},
+{
+    "model": "products.comment",
+    "pk": 17,
+    "fields": {
+        "user": 1,
+        "product": 11,
+        "timestamp": "2021-01-31T13:08:35.016Z",
+        "content": "fdsfsf"
+    }
+}
+]

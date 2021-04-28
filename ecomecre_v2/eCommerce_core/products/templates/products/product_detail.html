@@ -1,0 +1,192 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                {% if product %}
+                    <h2>Product Detail Page:</h2>
+                    <hr>
+                    <div class="row">
+                        <h4 class="ml-3">{{ product.title }}</h4>
+                        {% comment %}
+                        add / remove product from cart -> end of file handling with ajax
+                        {% endcomment %}
+                        <div class="ml-5">
+                            <form id="f11" method="post" class="form_product_ajax form"
+                                  action="{% url 'cart:cart_update'%}">
+                                <input type="hidden" name="product_pk" value="{{ product.pk }}">
+                                {% csrf_token %}
+                                <span id="add_remove">
+                                    {% if product_in_cart %}
+                                        <button type="submit" class="btn btn-light add_remove">remove</button>
+                                    {% else %}
+                                        <button type="submit" class="btn btn-light add_remove">add</button>
+                                    {% endif %}
+                                </span>
+                            </form>
+                        </div>
+
+                    </div>
+
+                    <p>{{ product.description | linebreaks }}</p>
+
+                    <p> price : {{ product.price }}</p>
+                {% endif %}
+                <br>
+
+                <div class="form-group">
+
+
+                    <a href="{% url 'products:product_list' %}" class="btn btn-outline-secondary">
+                        Back </a>
+
+                    {% if user.is_authenticated %}
+                        {% if user == product.user or user.is_superuser %}
+                            <a href="{% url 'products:product_update' pk=product.pk %}" class="btn btn-outline-success">
+                                Update </a>
+                            <a href="{% url 'products:product_delete' pk=product.pk %}" class="btn btn-outline-danger">
+                                Delete </a>
+                        {% endif %}
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            <div class="col-sm">
+                <br>
+                <h2> picture </h2>
+                <img src="{{ product.image.url }}" class="img-fluid rounded" alt="Responsive image">
+            </div>
+        </div>
+        <hr>
+
+        <br>
+        <div class="row">
+            <hr>
+            <div class="col-sm">
+
+                <p>
+                    <a class=" btn btn-outline-secondary" data-toggle="collapse" href="#collapseExample" role="button"
+                       aria-expanded="false" aria-controls="collapseExample">
+                        Push me for comments :
+                    </a>
+
+                </p>
+
+                <div class="collapse" id="collapseExample">
+                    <div class="card card-body">
+                        {% if product.comments %}
+                            <ul class="list-group list-group-flush">
+                                {% for comment in product.comments.all %}
+                                    <li class="list-group-item">
+                                        <h6>
+                                            Comment by {{ comment.user.username }} ,
+                                            at {{ comment.timestamp | timesince }} ago
+                                            <span class="badge badge-secondary">
+                                    <- </span>
+                                        </h6>
+                                        <p>{{ comment.content | linebreaks }}</p>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-sm">
+                {% if user.is_authenticated %}
+                    <br>
+                    <div class="form-leave-comment">
+                        <h5><strong>Leave Comment</strong></h5>
+
+                        <form method="POST" , action=".">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                {{ form.content }}
+                            </div>
+                            <br>
+                            <button type="submit" class="btn btn-outline-success">comment</button>
+                        </form>
+
+                    </div>
+                {% endif %}
+            </div>
+
+
+        </div>
+    </div>
+
+{% endblock content %}
+
+
+
+{% block script %}
+    <script>
+        $(document).ready(() => {
+            // ajax is async java request protocol ( its old school -> react new one )
+            let form = $(".form_product_ajax");
+
+            form.on('submit', (event) => {
+                event.preventDefault() // prevent default behavior of form submit
+
+                console.log("ajax grub control ...  ")
+
+                let action = form.attr("action"); // url
+                let httpMethod = form.attr('method'); // post
+                let formData = form.serialize(); // csrf_token
+
+                {% comment %}
+                handje ajax request in cart_update()
+                {% endcomment %}
+                $.ajax({
+                    url: action,
+                    method: httpMethod,
+                    data: formData,
+
+                    success: (data) => {
+                        let button = form.find('#add_remove')
+                        let cart_item_amount_navbar = $('#cart_item_amount_navbar')
+                        let message = $('.ajax_message')
+
+                        if (data.added) {
+                            button.html(
+                                '<button type="submit" class="btn btn-light add_remove">remove</button>'
+                            )
+                            message.html(
+                                '<div class="alert alert-success" role="alert">' +
+                                'product addad' +
+                                '</div>'
+                            )
+
+                        } else {
+                            button.html(
+                                '<button type="submit" class="btn btn-light add_remove">add</button>'
+                            )
+                            message.html(
+                                '<div class="alert alert-success" role="alert">' +
+                                'product removed' +
+                                '</div>'
+                            )
+                        }
+
+                        // update cart amount
+                        cart_item_amount_navbar.html(data.amount_of_items)
+
+                    },
+
+                    error: (errorData) => {
+                        console.log("error\n", errorData)
+                    }
+                })
+            })
+        })
+    </script>
+{% endblock script %}

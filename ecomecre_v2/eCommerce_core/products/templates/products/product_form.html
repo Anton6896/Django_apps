@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <!-- left side -->
+            <h3> Crete New Product</h3>
+
+            <form method="POST" class="bootstrap4" enctype="multipart/form-data">
+
+                {%csrf_token%}
+                {{ form|crispy }}
+
+                <br>
+                <button class="btn btn-primary" type="submit">Cretae</button>
+            </form>
+
+        </div>
+
+        <div class="col-sm">
+            <!-- right side  -->
+        </div>
+    </div>
+
+    {% endblock content %}

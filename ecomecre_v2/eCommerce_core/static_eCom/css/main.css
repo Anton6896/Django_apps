@@ -1,0 +1,19 @@
+.resize {
+    width: 400px;
+    height: auto;
+}
+
+.footer_my {
+    width: 100%;
+    bottom: 0;
+    clear: both;
+}
+
+body {
+    background-color: #f7fdfd;
+}
+
+
+
+
+
