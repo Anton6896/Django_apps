@@ -1,8 +1,17 @@
+## local env
+
+LOCAL_ENV=true
+
 POSTGRES_USER=anton
 POSTGRES_DB=anton
 POSTGRES_PASSWORD=anton
-POSTGRES_HOST=127.0.0.1
+POSTGRES_HOST=postgres
 
 DJANGO_SECRET=django-insecure-euig^wt+5t8c4+u7eo93_@k7w@1^8l3r*l%uz-jv!p!hb)*2^l
+
 CELERY_BROKER=redis://redis:6379/0
 CELERY_BACKEND=redis://redis:6379/0
+
+RABBITMQ_DEFAULT_PASS=password
+RABBITMQ_DEFAULT_USER=admin
+

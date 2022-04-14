@@ -19,28 +19,23 @@ services:
 
   celery:
     build: .
-    command: celery worker --app=core --loglevel=info
-    working_dir: ./core
+    container_name: celery_worker
+    command: celery -A core worker -l INFO -E
     volumes:
       - ./core:/opt/app
-    environment:
-      - PYTHONDONTWRITEBYTECODE=1
-      - PYTHONUNBUFFERED=1
-      - CELLOSIGN_DEBUG=no
-      - CELERY_BROKER_URL=redis://redis:6379/0
     env_file:
       - environment
     restart: always
     depends_on:
       - redis
+      - django
 
   rabbitmq:
     image: rabbitmq:3.6.6
     ports:
       - "5672:5672"
-    environment:
-      - RABBITMQ_DEFAULT_PASS=password
-      - RABBITMQ_DEFAULT_USER=admin
+    env_file:
+      - environment
 
   django:
     build: .
@@ -55,7 +50,6 @@ services:
     depends_on:
       - postgres
       - redis
-
 
 volumes:
   my-pg-data-1:
