@@ -1,6 +1,29 @@
 version: "3.8"
 
 services:
+  nginx:
+    build: ./nginx
+    volumes:
+      - ./core/static:/static
+    ports:
+      - "80:80"
+    depends_on:
+      - django
+
+  django:
+    build: .
+#    command: python manage.py runserver 0.0.0.0:8000
+    command: gunicorn core.wsgi:application -b 0.0.0.0:8000 --log-level=debug
+    volumes:
+      - ./core:/opt/app
+    ports:
+      - "8000:8000"
+    env_file:
+      - environment
+    depends_on:
+      - postgres
+      - redis
+
   postgres:
     image: postgres:alpine
     ports:
@@ -36,20 +59,6 @@ services:
       - "5672:5672"
     env_file:
       - environment
-
-  django:
-    build: .
-    container_name: django_app
-    command: python manage.py runserver 0.0.0.0:8000
-    volumes:
-      - ./core:/opt/app
-    ports:
-      - "8000:8000"
-    env_file:
-      - environment
-    depends_on:
-      - postgres
-      - redis
 
 volumes:
   my-pg-data-1:
